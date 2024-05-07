@@ -1,0 +1,47 @@
+<span id="timer">09:42</span>
+
+<script>
+// Function to update the countdown timer
+    function updateTimer() {
+        var minutes;
+        var seconds;
+        var count = 600; // Initial countdown value (10 minutes)
+        var timerElement = document.getElementById('timer');
+
+        // Function to update the timer display
+        function displayCountdown() {
+            minutes = Math.floor(count / 60);
+            seconds = count % 60;
+
+            // Add leading zeros if necessary
+            var formattedMinutes = minutes < 10 ? '0' + minutes : minutes;
+            var formattedSeconds = seconds < 10 ? '0' + seconds : seconds;
+
+            // Update the timer display
+            timerElement.textContent = formattedMinutes + ':' + formattedSeconds;
+        }
+
+        // Function to decrease countdown and update display
+        function countdown() {
+            count--;
+            if (count < 0) {
+                count = 600; // Reset countdown to 10 minutes when it reaches 0
+            }
+            displayCountdown();
+        }
+
+        // Initial display
+        displayCountdown();
+
+        // Start the countdown interval
+        var intervalId = setInterval(countdown, 1000);
+
+        // Clear the interval when the page unloads
+        window.onbeforeunload = function() {
+            clearInterval(intervalId);
+        };
+    }
+
+    // Call the fetchCountryInfoAndUpdateTimer function when the page loads
+    window.onload = fetchCountryInfoAndUpdateTimer;
+</script>
